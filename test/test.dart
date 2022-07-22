@@ -1,10 +1,8 @@
-import 'dart:math';
-
-import 'package:latlong2/latlong.dart';
+import 'package:platform_maps_flutter/platform_maps_flutter.dart';
 import 'package:simplify/simplify.dart';
 import 'package:test/test.dart';
 
-List<LatLng> points = [
+const List<LatLng> points = [
   LatLng(224.55, 250.15),
   LatLng(226.91, 244.19),
   LatLng(233.31, 241.45),
@@ -107,7 +105,7 @@ List<LatLng> points = [
   LatLng(866.36, 480.77),
 ];
 
-List<LatLng> simplified = [
+const List<LatLng> simplified = [
   LatLng(224.55, 250.15),
   LatLng(267.76, 213.81),
   LatLng(296.91, 155.64),
@@ -150,8 +148,8 @@ void main() {
   });
 
   test('just return the points if it has only one point', () {
-    final result = simplify([LatLng(1, 2)]);
-    expect(result, equals([LatLng(1, 2)]));
+    final result = simplify(const [LatLng(1, 2)]);
+    expect(result, equals(const [LatLng(1, 2)]));
   });
 
   test('ust return the points if it has no points', () {

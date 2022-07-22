@@ -1,6 +1,4 @@
-import 'dart:math';
-
-import 'package:latlong2/latlong.dart';
+import 'package:platform_maps_flutter/platform_maps_flutter.dart';
 
 num _getSqDist<T extends LatLng>(
   T p1,

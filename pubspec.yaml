@@ -3,11 +3,14 @@ description: A high-performance dart 2D/3D polyline simplification library
 version: 1.0.1
 repository: https://github.com/bjartebore/simplify
 
+publish_to: none
+
 environment:
   sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
-  latlong2: ^0.8.1
+  platform_maps_flutter:
+    git: https://github.com/NextFaze/platform_maps_flutter.git
 
 dev_dependencies:
   lints: ^1.0.1
