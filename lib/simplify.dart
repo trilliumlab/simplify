@@ -1,41 +1,43 @@
 import 'dart:math';
 
-num _getSqDist<T extends Point>(
+import 'package:latlong2/latlong.dart';
+
+num _getSqDist<T extends LatLng>(
   T p1,
   T p2,
 ) {
-  final num dx = p1.x - p2.x, dy = p1.y - p2.y;
+  final num dx = p1.longitude - p2.longitude, dy = p1.latitude - p2.latitude;
 
   return dx * dx + dy * dy;
 }
 
 // square distance from a point to a segment
-num _getSqSegDist<T extends Point>(
+num _getSqSegDist<T extends LatLng>(
   T p,
   T p1,
   T p2,
 ) {
-  num x = p1.x, y = p1.y, dx = p2.x - x, dy = p2.y - y;
+  num x = p1.longitude, y = p1.latitude, dx = p2.longitude - x, dy = p2.latitude - y;
 
   if (dx != 0 || dy != 0) {
-    final double t = ((p.x - x) * dx + (p.y - y) * dy) / (dx * dx + dy * dy);
+    final double t = ((p.longitude - x) * dx + (p.latitude - y) * dy) / (dx * dx + dy * dy);
 
     if (t > 1) {
-      x = p2.x;
-      y = p2.y;
+      x = p2.longitude;
+      y = p2.latitude;
     } else if (t > 0) {
       x += dx * t;
       y += dy * t;
     }
   }
 
-  dx = p.x - x;
-  dy = p.y - y;
+  dx = p.longitude - x;
+  dy = p.latitude - y;
 
   return dx * dx + dy * dy;
 }
 
-List<T> _simplifyRadialDist<T extends Point>(
+List<T> _simplifyRadialDist<T extends LatLng>(
   List<T> points,
   double sqTolerance,
 ) {
@@ -60,7 +62,7 @@ List<T> _simplifyRadialDist<T extends Point>(
   return newPoints;
 }
 
-void _simplifyDPStep<T extends Point>(
+void _simplifyDPStep<T extends LatLng>(
   List<T> points,
   int first,
   int last,
@@ -91,7 +93,7 @@ void _simplifyDPStep<T extends Point>(
 }
 
 // simplification using Ramer-Douglas-Peucker algorithm
-List<T> _simplifyDouglasPeucker<T extends Point>(
+List<T> _simplifyDouglasPeucker<T extends LatLng>(
   List<T> points,
   double sqTolerance,
 ) {
@@ -105,7 +107,7 @@ List<T> _simplifyDouglasPeucker<T extends Point>(
 }
 
 // both algorithms combined for awesome performance
-List<T> simplify<T extends Point>(
+List<T> simplify<T extends LatLng>(
   List<T> points, {
   double? tolerance,
   bool highestQuality = false,
